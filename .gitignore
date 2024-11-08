@@ -1,0 +1,6 @@
+.env
+appdata/*
+
+# except
+!appdata/config/uploads.ini
+!appdata/nginx/default.conf
