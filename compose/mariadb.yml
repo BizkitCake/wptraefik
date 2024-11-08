@@ -1,0 +1,22 @@
+services:
+  database:
+    container_name: wp-database
+    image: mariadb:11.6.1-rc
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+    networks:
+      - wp_be
+    volumes:
+      - $APPDATA/database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
