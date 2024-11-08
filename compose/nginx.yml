@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx:1.27.2
+    container_name: wp-nginx
+    restart: unless-stopped
+    networks:
+      - wp_be
+      - t3_proxy
+    depends_on:
+      - wordpress
+    volumes:
+      - $WP_DIR:/var/www/html
+      - $NGINX_CONF:/etc/nginx/conf.d/default.conf
+      - $NGINX_LOGS:/var/log/nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wp-rtr.entrypoints=websecure"
+      - "traefik.http.routers.wp-rtr.rule=Host(`rs.$DOMAINNAME`) || Host(`rs.$DOMAINNAME`)"
+      - "traefik.http.routers.wp-rtr.middlewares=chain-oauth@file"
+      - "traefik.http.routers.wp-rtr.service=wp-svc"
+      - "traefik.http.services.wp-svc.loadbalancer.server.port=80"

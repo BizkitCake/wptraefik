@@ -1,0 +1,12 @@
+networks:
+  wordpress_network:
+    name: wp_be
+    driver: bridge
+  t3_proxy:
+    external: true
+
+include:
+  - ./compose/wordpress.yml
+#  - ./compose/mysql.yml
+  - ./compose/nginx.yml
+  - ./compose/mariadb.yml

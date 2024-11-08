@@ -1,0 +1,14 @@
+services:
+  database:
+    container_name: wp-mysql
+    image: mysql:9.1.0
+    restart: unless-stopped
+    networks:
+      - wp_be
+    environment:
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$DB_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+    volumes:
+      - ${MYSQL_LOCAL_HOME}:/var/lib/mysql
