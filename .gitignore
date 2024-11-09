@@ -1,5 +1,6 @@
 .env
 appdata/*
+logs/*
 
 # except
 !appdata/config/uploads.ini
