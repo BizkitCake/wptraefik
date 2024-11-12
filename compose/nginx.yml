@@ -6,8 +6,6 @@ services:
     networks:
       - wp_be
       - t3_proxy
-    depends_on:
-      - wordpress
     volumes:
       - $WP_DIR:/var/www/html
       - $NGINX_CONF:/etc/nginx/conf.d/default.conf
