@@ -9,6 +9,7 @@ services:
       - t3_proxy
     depends_on:
       - database
+      - nginx
     volumes:
       - $WORDPRESS_LOCAL_HOME:/var/www/html
       - $WORDPRESS_UPLOADS_CONFIG:/usr/local/etc/php/conf.d/uploads.ini

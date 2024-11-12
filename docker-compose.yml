@@ -10,3 +10,4 @@ include:
 #  - ./compose/mysql.yml
   - ./compose/nginx.yml
   - ./compose/mariadb.yml
+  - ./compose/redis.yml
