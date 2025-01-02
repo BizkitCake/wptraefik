@@ -12,7 +12,7 @@ services:
       - nginx
     volumes:
       - $APPDATA/wordpress/html:/var/www/html
-      - $APPDATA/wordpress/config:/usr/local/etc/php/conf.d/uploads.ini
+      - $APPDATA/wordpress/config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=$DB_HOST
       - WORDPRESS_DB_NAME=$DB_NAME

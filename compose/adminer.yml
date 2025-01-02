@@ -1,0 +1,21 @@
+services:
+  adminerevo:
+    container_name: wp-adminer
+    image: ghcr.io/shyim/adminerevo:latest
+    restart: unless-stopped
+    networks:
+      - wp_be
+      - t3_proxy
+    depends_on:
+      - database
+      - nginx
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.adminer-rtr.entrypoints=websecure"
+      - "traefik.http.routers.adminer-rtr.rule=Host(`adminer.$DOMAINNAME`)"
+      # Middlewares
+      - "traefik.http.routers.adminer-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.adminer-rtr.service=adminer-svc"
+      - "traefik.http.services.adminer-svc.loadbalancer.server.port=8080"

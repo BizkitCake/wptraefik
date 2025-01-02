@@ -11,3 +11,4 @@ include:
   - ./compose/nginx.yml
   - ./compose/mariadb.yml
   - ./compose/redis.yml
+  - ./compose/adminer.yml
