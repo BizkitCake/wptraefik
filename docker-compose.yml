@@ -1,5 +1,5 @@
 networks:
-  wordpress_network:
+  wp_be:
     name: wp_be
     driver: bridge
   t3_proxy:
