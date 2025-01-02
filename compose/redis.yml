@@ -1,6 +1,7 @@
 ---
 services:
   redis:
+    container_name: wp-redis
     image: redis:alpine
 #    ports:
 #      - 6379:6379
