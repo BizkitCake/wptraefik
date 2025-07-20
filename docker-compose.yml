@@ -2,13 +2,15 @@ networks:
   wp_be:
     name: wp_be
     driver: bridge
+  mon:
+    external: true
   t3_proxy:
     external: true
 
 include:
   - ./compose/wordpress.yml
-#  - ./compose/mysql.yml
   - ./compose/nginx.yml
   - ./compose/mariadb.yml
   - ./compose/redis.yml
-  - ./compose/adminer.yml
+#  - ./compose/adminer.yml
+#  - ./compose/mysql.yml

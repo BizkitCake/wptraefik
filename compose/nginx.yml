@@ -1,7 +1,7 @@
 services:
-  nginx:
+  robostore-nginx:
     image: nginx:1.27.2
-    container_name: wp-nginx
+    container_name: robostore-nginx
     restart: unless-stopped
     networks:
       - wp_be
@@ -13,7 +13,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wp-rtr.entrypoints=websecure"
-      - "traefik.http.routers.wp-rtr.rule=Host(`rs.$DOMAINNAME`)"
-      - "traefik.http.routers.wp-rtr.middlewares=chain-oauth@file"
+      - "traefik.http.routers.wp-rtr.rule=Host(`$DOMAINNAME`)"
+      - "traefik.http.routers.wp-rtr.middlewares=chain-no-auth@file"
       - "traefik.http.routers.wp-rtr.service=wp-svc"
       - "traefik.http.services.wp-svc.loadbalancer.server.port=80"

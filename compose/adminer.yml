@@ -3,12 +3,13 @@ services:
     container_name: wp-adminer
     image: ghcr.io/shyim/adminerevo:latest
     restart: unless-stopped
+    volumes:
+      - /home/mneza/tmp/robostore:/dumps
     networks:
       - wp_be
       - t3_proxy
     depends_on:
       - database
-      - nginx
     labels:
       - "traefik.enable=true"
       # HTTP Routers

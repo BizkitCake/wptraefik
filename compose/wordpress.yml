@@ -2,14 +2,14 @@ services:
   wordpress:
     # default port 9000 (FastCGI)
     image: wordpress:6.6.2-php8.3-fpm
-    container_name: wp-wordpress
+    container_name: wordpress
     restart: unless-stopped
+    user: 1000:1000
     networks:
       - wp_be
-      - t3_proxy
     depends_on:
-      - database
-      - nginx
+      - robostore-database
+      - robostore-nginx
     volumes:
       - $APPDATA/wordpress/html:/var/www/html
       - $APPDATA/wordpress/config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -18,3 +18,12 @@ services:
       - WORDPRESS_DB_NAME=$DB_NAME
       - WORDPRESS_DB_USER=$DB_USER
       - WORDPRESS_DB_PASSWORD=$DB_PASSWORD
+      - WORDPRESS_REDIS_HOST=robostore-redis
+      - WORDPRESS_REDIS_PORT=6379
+
+      - WORDPRESS_CONFIG_EXTRA=|
+          define('DB_CHARSET', 'utf8mb4');
+          define('WP_SITEURL', 'https://$DOMAINNAME');
+          define('WP_HOME', 'https://$DOMAINNAME');
+          define('WP_REDIS_HOST', 'robostore-redis');
+          define('WP_REDIS_PORT', '6379');
